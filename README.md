@@ -43,7 +43,8 @@ M.Fajri Davyza Chaniago
 | Jumlah        |     1316      |           /21 |  255.255.248.0  |       -       |
 
 - SETTING INTERFACE PADA GNS3
-  **Foosha**
+
+**Foosha**
 
 ```
 auto eth0
