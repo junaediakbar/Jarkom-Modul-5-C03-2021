@@ -25,21 +25,25 @@ M.Fajri Davyza Chaniago
 
 ### (B) Konfigurasi IP dengan VLSM (Variable Length Subnet Masking) :
 
+![Penamaan VLSM](img/b-vlsm-bulet.png)
+
 ### Tree :
+
+![Tree](img/b-tree-vlsm.png)
 
 ### Pembagian IP :
 
 | Subnet        |   Jumlah IP   |       Netmask |   subnetmask    |      nid      |
 | :------------ | :-----------: | ------------: | :-------------: | :-----------: |
 | ------------- | ------------- | ------------- |  -------------  | ------------- |
-| A1            |       2       |           /30 | 255.255.255.252 |  192.185.0.0  |
-| A2            |       2       |           /30 | 255.255.255.252 |  192.185.0.4  |
-| A3            |      201      |           /24 |  255.255.255.0  |  192.185.1.0  |
-| A4            |      301      |           /23 |  255.255.254.0  |  192.185.2.0  |
-| A5            |      101      |           /25 | 255.255.255.128 | 192.185.0.128 |
-| A6            |      701      |           /22 |  255.255.252.0  |  192.185.4.0  |
-| A7            |       4       |           /29 | 255.255.255.248 | 192.185.0.16  |
-| A8            |       4       |           /29 | 255.255.255.248 | 192.185.0.24  |
+| A1            |       2       |           /25 | 255.255.255.128 |  192.185.7.0  |
+| A2            |      301      |           /23 |  255.255.254.0  |  192.185.0.4  |
+| A3            |       4       |           /29 | 255.255.255.248 | 192.185.7.128 |
+| A4            |      101      |           /30 | 255.255.255.252 | 192.185.7.144 |
+| A5            |      101      |           /30 | 255.255.255.252 | 192.185.7.148 |
+| A6            |       4       |           /29 | 255.255.255.248 | 192.185.7.136 |
+| A7            |      701      |           /22 |  255.255.252.0  |  192.185.0.0  |
+| A8            |      201      |           /24 |  255.255.255.0  |  192.185.6.0  |
 | Jumlah        |     1316      |           /21 |  255.255.248.0  |       -       |
 
 - SETTING INTERFACE PADA GNS3
@@ -48,17 +52,22 @@ M.Fajri Davyza Chaniago
 
 ```
 auto eth0
-iface eth0 inet dhcp
+iface eth0 inet static
+      address 192.168.122.11
+      netmask 255.255.255.0
+      gateway 192.168.122.1
+      up echo nameserver 192.185.7.130 > /etc/resolv.conf
 
 auto eth1
 iface eth1 inet static
-        address 192.185.0.1
-        netmask 255.255.255.252
+      address 192.185.7.149
+      netmask 255.255.255.252
 
 auto eth2
 iface eth2 inet static
-         address 192.185.0.5
-         netmask 255.255.255.252
+      address 192.185.7.145
+      netmask 255.255.255.252
+
 ```
 
 **Water7**
@@ -66,24 +75,26 @@ iface eth2 inet static
 ```
 auto eth0
 iface eth0 inet static
-        address 192.185.0.2
-        netmask 255.255.255.252
-        gateway 192.185.0.1
+      address 192.185.7.146
+      netmask 255.255.255.252
+      gateway 192.185.7.145
+      up echo nameserver 192.185.7.130 > /etc/resolv.conf
 
 auto eth1
 iface eth1 inet static
-        address 192.185.0.17
-        netmask 255.255.255.248
+      address 192.185.7.1
+      netmask 255.255.255.128
 
 auto eth2
 iface eth2 inet static
-         address 192.185.0.129
-         netmask 255.255.255.128
+      address 192.185.7.129
+      netmask 255.255.255.248
 
 auto eth3
 iface eth3 inet static
-         address 192.185.4.1
-         netmask 255.255.252.0
+      address 192.185.0.1
+      netmask 255.255.252.0
+
 ```
 
 **GUANHAO**
@@ -91,104 +102,104 @@ iface eth3 inet static
 ```
 auto eth0
 iface eth0 inet static
-          address 192.185.0.6
-          netmask 255.255.255.252
-          gateway 192.185.0.5
+	address 192.185.7.150
+	netmask 255.255.255.252
+	gateway 192.185.7.149
+	up echo nameserver 192.185.7.130 > /etc/resolv.conf
 
 auto eth1
 iface eth1 inet static
-          address 192.185.0.25
-          netmask 255.255.255.248
+	address 192.185.7.137
+	netmask 255.255.255.248
 
 auto eth2
 iface eth2 inet static
-          address 192.185.1.1
-          netmask 255.255.255.0
+	address 192.185.4.1
+	netmask 255.255.254.0
 
 auto eth3
 iface eth3 inet static
-           address 192.185.2.1
-          netmask 255.255.254.0
+	address 192.185.6.1
+	netmask 255.255.255.0
 ```
 
 **Blueno**
 
 ```
 auto eth0
-iface eth0 inet static
-      address 192.185.0.130
-      netmask 255.255.255.128
-      gateway 192.185.0.129
+iface eth0 inet dhcp
 ```
 
 **Chiper**
 
 ```
 auto eth0
-iface eth0 inet static
-       address 192.185.4.2
-      netmask 255.255.252.0
-       gateway 192.185.4.1
+iface eth0 inet dhcp
 ```
 
-**ELENA**
+**Elena**
 
 ```
 auto eth0
-iface eth0 inet static
-       address 192.185.2.2
-       netmask 255.255.254.0
-       gateway 192.185.2.1
+iface eth0 inet dhcp
 ```
 
 **fukurou**
 
 ```
 auto eth0
-iface eth0 inet static
-       address 192.185.1.2
-       netmask 255.255.255.0
-       gateway 192.185.1.1
+iface eth0 inet dhcp
+
 ```
 
 **MainGate**
 
 ```
+# Static config for eth0
 auto eth0
 iface eth0 inet static
-       address 192.185.0.27
-       netmask 255.255.255.248
-       gateway 192.185.0.25
+	address 192.185.7.139
+	netmask 255.255.255.248
+	gateway 192.185.7.137
+	up echo nameserver 192.185.7.130 > /etc/resolv.conf
+
 ```
 
 **Jorge**
 
 ```
+# Static config for eth0
 auto eth0
 iface eth0 inet static
-       address 192.185.0.26
-       netmask 255.255.255.248
-       gateway 192.185.0.25
+	address 192.185.7.138
+	netmask 255.255.255.248
+	gateway 192.185.7.137
+	up echo nameserver 192.185.7.130 > /etc/resolv.conf
+
 ```
 
 **Doriki**
 
 ```
+# Static config for eth0
 auto eth0
 iface eth0 inet static
-       address 192.185.0.18
-       netmask 255.255.255.248
-       gateway 192.185.0.17
+      address 192.185.7.130
+      netmask 255.255.255.248
+      gateway 192.185.7.129
+      up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
 **Jipangu**
 
 ```
+# Static config for eth0
 auto eth0
 iface eth0 inet static
-       address 192.185.0.19
-       netmask 255.255.255.248
-       gateway 192.185.0.17
+      address 192.185.7.131
+      netmask 255.255.255.248
+      gateway 192.185.7.129
+      up echo nameserver 192.185.7.130 > /etc/resolv.conf
 ```
 
 ### (C) Routing
@@ -196,94 +207,79 @@ iface eth0 inet static
 **Foosha**
 
 ```
-route add -net 192.185.1.0 netmask 255.255.255.0 gw 192.185.0.6
-route add -net 192.185.2.0 netmask 255.255.254.0 gw 192.185.0.6
-route add -net 192.185.0.24 netmask 255.255.255.248 gw 192.185.0.6
-route add -net 192.185.4.0 netmask 255.255.252.0 gw 192.185.0.2
-route add -net 192.185.0.128 netmask 255.255.255.128 gw 192.185.0.2
-route add -net 192.185.0.16 netmask 255.255.255.248 gw 192.185.0.2
+# Lewat eth2
+route add -net 192.185.7.128 netmask 255.255.255.248 gw 192.185.7.146   # A3
+route add -net 192.185.7.0 netmask 255.255.255.128 gw 192.185.7.146   # A1
+route add -net 192.185.0.0 netmask 255.255.252.0 gw 192.185.7.146   # A7
+
+# Lewat eth1
+route add -net 192.185.4.0 netmask 255.255.254.0 gw 192.185.7.150   # A2
+route add -net 192.185.7.136 netmask 255.255.255.248 gw 192.185.7.150   # A6
+route add -net 192.185.6.0 netmask 255.255.255.0 gw 192.185.7.150   # A8
 ```
 
 ### (D) Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan Elena secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya.
 
 cara:
-
-1. Install `apt-get install isc-dhcp-relay -y` pada foosha, water7, dan guanhao, `apt-get install isc-dhcp-server` pada Jipangu
-
-2. Pada Router (foosha, water7 dan guanhao) Edit file `/etc/sysctl.conf` deengan command
-
-```
-net.ipv4.ip_forward=1
-net.ipv4.conf.all.accept_source_route = 1
-```
-
-3. Lakukan sysctl -p
-4. Buka file `/etc/default/isc-dhcp-relay` dan edit server dengan mengarahkan dchp-relay menuju Jipangu `192.185.0.19` lalu `service isc-dhcp-relay restart` pada foosha, water7, dan guanhao
-
-```
-echo '# What servers should the DHCP relay forward requests to?
-SERVERS="192.185.0.19"
-
-# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
-INTERFACES=""
-
-# Additional options that are passed to the DHCP relay daemon?
-OPTIONS="" '> /etc/default/isc-dhcp-relay
-```
-
-5. Pada Jipangu edit file `/etc/default/isc-dhcp-server` dengan menambahkan:
-
-```
-INTERFACES="eth0"
-```
-
-6. Pada dhcp-server isikan data pada `/etc/dhcp/dhcpd.conf` di Jipangu, lalu lakukan `service isc-dhcp-server restart`
-
-```
-subnet 192.185.1.0 netmask 255.255.255.0 {
-    range 192.185.1.2 192.185.1.254;
-    option routers 192.185.1.1;
-    option broadcast-address 192.185.1.255;
-    option domain-name-servers 192.185.0.18;
-    default-lease-time 600;
-    max-lease-time 7200;
-}
-subnet 192.185.0.128 netmask 255.255.255.128 {
-    range 192.185.0.130 192.185.0.254;
-    option routers 192.185.0.129;
-    option broadcast-address 192.185.0.255;
-    option domain-name-servers 192.185.0.18;
-    default-lease-time 600;
-    max-lease-time 7200;
-}
-subnet 192.185.4.0 netmask 255.255.252.0 {
-    range 192.185.4.2 192.185.4.254;
-    option routers 192.185.4.1;
-    option broadcast-address 192.185.4.255;
-    option domain-name-servers 192.185.0.18;
-    default-lease-time 600;
-    max-lease-time 7200;
-}
-subnet 192.185.2.0 netmask 255.255.254.0 {
-    range 192.185.2.2 192.185.2.254;
-    option routers 192.185.2.1;
-    option broadcast-address 192.185.2.255;
-    option domain-name-servers 192.185.0.18;
-    default-lease-time 600;
-    max-lease-time 7200;
-}
-subnet 192.185.0.16 netmask 255.255.255.248{
-}
-```
-
-7. Buka file '/etc/network/interfaces`. Command konfigurasi lama (static) dan ubah ip Blueno, Cipher, Fukurou, dan Elena dengan command
+Karena Sebelumnya kita telah memberikan IP dhcp kepada Blueno, Cipher, Fukurou, dan Elena :
 
 ```
 auto eth0
 iface eth0 inet dhcp
 ```
 
-8. Lakukan restart di node yang dijadikan ip dhcp
+Pada foosha disetting sebagai dhcp relay
+
+**Foosha**
+
+```
+apt-get update
+apt-get install isc-dhcp-relay -y
+
+# Setting Interface & Server
+echo "SERVERS=\"192.185.7.131\"
+INTERFACES=\"eth0 eth1 eth2 eth3\"
+OPTIONS=
+" > /etc/default/isc-dhcp-relay
+
+```
+
+**Water 7**
+
+```
+apt-get update
+apt-get install isc-dhcp-relay -y
+
+# Setting Interface & Server
+echo "SERVERS=\"192.185.7.131\"
+INTERFACES=\"eth0 eth1 eth2 eth3\"
+OPTIONS=
+" > /etc/default/isc-dhcp-relay
+
+# Start DHCP Relay
+service isc-dhcp-relay restart
+
+```
+
+**Guanhao**
+
+```
+
+apt-get update
+apt-get install isc-dhcp-relay -y
+
+# Setting Interface & Server
+
+echo "SERVERS=\"192.185.7.131\"
+INTERFACES=\"eth0 eth1 eth2 eth3\"
+OPTIONS=
+" > /etc/default/isc-dhcp-relay
+
+# Start DHCP Relay
+
+service isc-dhcp-relay restart
+
+```
 
 ### (1) Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Foosha menggunakan iptables, tetapi Luffy tidak ingin menggunakan MASQUERADE.
 
