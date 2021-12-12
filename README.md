@@ -19,7 +19,7 @@ M.Fajri Davyza Chaniago
 
 ### 📅 5 - 7 Desember 2021
 
-### (A) Tugas pertama kalian yaitu membuat topologi jaringan sesuai dengan rancangan yang diberikan Luffy dibawah ini:
+### (A) Tugas pertama kalian yaitu membuat topologi jaringan sesuai dengan rancangan yang diberikan Luffy seperti dibawah ini:
 
 ![Soal a](img/soal-a.png)
 
